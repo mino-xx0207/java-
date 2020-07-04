@@ -62,6 +62,7 @@ public class ExcelTestScore {
 						sheet.addCell(courseName);
 						sheet.addCell(score);
 						// 查询数据库表数据
+						
 						String sql = "select stu.stu_name,cour.course_name,s.score from student as stu,course as cour"
 								+ ",score as s where stu.stu_id = s.stu_id and s.course_id = cour.course_id";
 						ResultSet rs = userDB.search_info(sql);
