@@ -31,52 +31,52 @@ import test.ExcelTestTeacher;
  *
  * @date 2020-7-4
  * @author lisai
- * @version  v1.0
+ * @version v1.0
  */
 public class ManageTea {
 
 	/** The driver name. */
 	String driverName = "com.mysql.jdbc.Driver";
-	
+
 	/** The uri. */
 	String uri = "jdbc:mysql://localhost:3306/jsu?user=root&password=123456&useSSL=true";
-	
+
 	/** The user DB. */
 	public Teacher_Dao userDB = new Teacher_Dao(driverName, uri);
 
 	/** The frame tea manage. */
 	JFrame frame_tea_manage;
-	
+
 	/** The lb. */
 	JLabel lb;
 
 	/** The btn increase. */
 	JButton btn_increase;
-	
+
 	/** The btn delete. */
 	JButton btn_delete;
-	
+
 	/** The btn search. */
 	JButton btn_search;
-	
+
 	/** The btn change. */
 	JButton btn_change;
-	
+
 	/** The btn back. */
 	JButton btn_back;// 返回按钮可返回选择管理主界面
-	
+
 	/** The btn import. */
 	JButton btn_import;
-    
-    /** The btn export. */
-    JButton btn_export;
-    
+
+	/** The btn export. */
+	JButton btn_export;
+
 	/** The panel north. */
 	JPanel panelNorth;
-	
+
 	/** The panel center. */
 	JPanel panelCenter;
-	
+
 	/** The panel south. */
 	JPanel panelSouth;
 
@@ -143,11 +143,12 @@ public class ManageTea {
 				// 删之前应该查找是否存在
 				String content = JOptionPane.showInputDialog(null, "请输入你要删除教师对象的工号", "删除教师",
 						JOptionPane.INFORMATION_MESSAGE);
+				if (content != null) {
 				String sql1 = "select tea_id from teacher where tea_id='" + content + "';";
 				ResultSet rs = userDB.search_info(sql1);
 				try {
 					if (rs.next()) {// 存在就删掉
-						if (content != null) {
+					
 							int n = JOptionPane.showConfirmDialog(null, "确认删除吗?", "确认删除框", JOptionPane.YES_NO_OPTION);
 							if (n == JOptionPane.YES_OPTION) {
 								String sql = "delete from teacher where tea_id = '" + content + "';";
@@ -156,12 +157,15 @@ public class ManageTea {
 									JOptionPane.showMessageDialog(null, "删除成功");
 									content = null;
 								}
-							} else if (n == JOptionPane.NO_OPTION) {
+									else {
+										JOptionPane.showMessageDialog(null, "删除失败");
+									}
+								}
+							else if (n == JOptionPane.NO_OPTION) {
 								JOptionPane.showMessageDialog(null, "取消删除");
 							}
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "该教师不存在");
+						}else {
+							JOptionPane.showMessageDialog(null, "该教师不存在");
 					}
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
@@ -169,6 +173,7 @@ public class ManageTea {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
 				}
 			}
 		});
