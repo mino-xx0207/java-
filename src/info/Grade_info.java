@@ -28,7 +28,7 @@ public class Grade_info {
 //也要记得隐藏
 	// 可使用JDialog ，点击老师名字弹出窗口可显示老师的基本信息
 	/** The driver name. */
-// X掉回到主选择界面
+
 	private String driverName = "com.mysql.jdbc.Driver";
 	
 	/** The uri. */
@@ -56,13 +56,11 @@ public class Grade_info {
 	/** The dialog. */
 	JDialog dialog;
 
-	//你的这种编码习惯真的特别不好。不过你自己，是很多人，都喜欢把啥都搞到构造器里面。//刚开始我也分类，但是我感觉太多了类
-	//不是分不分类的问题。你这些代码，干嘛要写在构造器里面。你就不能写在方法里面。
-	//这个代码我不就给你改结构了。你这样的代码编写习惯，在真实开发中，简直没法忍受，会被喷死的
+
 	/**
 	 * Instantiates a new grade info.
 	 */
-	//在构造器里面不要写算七八糟的，把构造器当方法用。
+
 	public Grade_info() {
 		frame_score = new JFrame("成绩页面");
 		frame_score.setSize(650, 300);
@@ -71,7 +69,7 @@ public class Grade_info {
 		//你自己把sql修改下，加别名。
 		
 		//现在没有展示数据就是本来就没有数据。正常
-		//导不出来数据，是导这个表的数据吗？一样的，也是没有数据。不是，我是导教师，然后虽然没有数据，但是为什么它的GUI界面也没有啊
+		//导不出来数据，一样的，也是没有数据
 		String sql = "select c.course_name,t.tea_name,s.score,c.credit,c.hour,c.course_category "
 				+ "from score as s,teacher as t,course as c where s.course_id = c.course_id and "
 				+ "s.tea_id = t.tea_id and s.stu_id='" + Log.userName.getText() + "';";
