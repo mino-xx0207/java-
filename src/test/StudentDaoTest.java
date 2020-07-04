@@ -27,19 +27,19 @@ public class StudentDaoTest {
 	public Stu_Dao userDB = new Stu_Dao(driverName, uri);
 	
     /**
-     * Test delete all student.
+     * Test delete student.
      */
     @Test
-	public void testDeleteAllStudent() {
+	public void testDeleteStudent() {
 		int num = userDB.deleteStuInfo("delete from student where stu_id='20009'");
 		assertEquals(1, num);
 	}
     
     /**
-     * Test update all student.
+     * Test update student.
      */
     @Test
-	public void testUpdateAllStudent() {
+	public void testUpdateStudent() {
 		String sql = "update student set stu_name = ?,sex= ?, "
 				+ "age= ?, college= ?, "
 				+ "major= ?, grade= ?, class= ?, address= ?, telephone= ? where stu_id ='20001';";
