@@ -36,7 +36,7 @@ public class TeacherDaoTest {
 	}
     
     /**
-     * Test update student.
+     * Test update teacher.
      */
     @Test
 	public void testUpdateTeacher() {
