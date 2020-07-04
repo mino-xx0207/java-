@@ -42,7 +42,7 @@ public class Score_show {
 	//这样的话应该不会报错，但是不好。
 	/** The info. */
 	//这里是数组，不好刚开始就初始化。先给Null吧。先这样吧，有数据就不会报错。导出的地方在哪里？
-	Object[][] info = new Object[10000][3];
+	Object[][] info = new Object[10000][5];
 	
 	/** The i. */
 	int i = 0;
@@ -64,14 +64,14 @@ public class Score_show {
 	public Score_show() {
 		frame_score = new JFrame("成绩页面");
 		
-		frame_score.setSize(500, 300);
+		frame_score.setSize(700, 300);
 		frame_score.setLocation(800, 300);
 		frame_score.setLayout(new BorderLayout());
 		//你自己把sql修改下，加别名。
 		
 		//现在没有展示数据就是本来就没有数据。正常
-		//导不出来数据，是导这个表的数据吗？一样的，也是没有数据。不是，我是导教师，然后虽然没有数据，但是为什么它的GUI界面也没有啊
-		String sql = "select stu.stu_name,c.course_name,s.score"
+		//导不出来数据，是导这个表的数据吗？一样的，也是没有数据。不是，我是导教师，然后虽然没有数据，但是为什么它的GUI界面也没有啊，班级，专业
+		String sql = "select stu.stu_name,stu.class,stu.major,c.course_name,s.score"
 				+ " from score as s,student as stu,course as c where s.course_id = c.course_id and "
 				+ "stu.stu_id = s.stu_id ;";
 		ResultSet rs = userDB.search_info(sql);
@@ -79,14 +79,16 @@ public class Score_show {
 			while (rs.next()) {
 				info[i][0] = rs.getString(1);
 				info[i][1] = rs.getString(2);
-				info[i][2] = rs.getDouble(3);
+				info[i][2] = rs.getString(3);
+				info[i][3] = rs.getString(4);
+				info[i][4] = rs.getDouble(5);
 				i++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String[] columnTitle = { "姓名", "课程名", "成绩" };
+		String[] columnTitle = { "姓名","班级","专业","课程名", "成绩" };
 		//现在不显示，是因为报错了。info =null。Jtable在调用getColumn,getRow的时候就会报空指针
 		table = new JTable(info, columnTitle);
 		
